@@ -1,0 +1,41 @@
+{
+  "name": "api-dividends",
+  "version": "1.0.0",
+  "description": "An api to get all the IBOVESPA dividends",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --ext js --exec  babel-node src/index.js",
+    "build": "babel src -d dist",
+    "start": "npm run build && node dist/index.js",
+    "serve": "node dist/index.js"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/joi-date": "^2.0.1",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.0.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-joi-validation": "^4.0.3",
+    "firebase-admin": "^8.11.0",
+    "fs-extra": "^9.0.0",
+    "handlebars": "^4.7.6",
+    "moment": "^2.24.0",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.0",
+    "nodemailer": "^6.4.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+    "@babel/plugin-transform-parameters": "^7.9.5",
+    "@babel/plugin-transform-typescript": "^7.9.4",
+    "@babel/preset-env": "^7.9.5"
+  },
+  "author": "Otavio Henrique Pires Costa",
+  "license": "ISC"
+}
