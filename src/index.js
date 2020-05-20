@@ -10,9 +10,7 @@ import * as admin from 'firebase-admin'
 // --- Routers ---
 import {
     users,
-    dividends,
     auth,
-    stocks
 } from './routers'
 
 
@@ -20,7 +18,7 @@ const serviceCredentials = require('./credentials/firebase').CREDENTIALS
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceCredentials),
-    databaseURL: "https://api-dividends.firebaseio.com"
+    databaseURL: "https://firebase-firenase.firebaseio.com"
 })
 
 const app = express()
@@ -33,9 +31,7 @@ app.use(morgan(':user-agent :method :url :status :response-time ms'))
 
 const BASE_PATH = '/v1'
 app.use(AuthenticatorMiddleware)
-app.use(`${BASE_PATH}/stocks`, stocks)
 app.use(`${BASE_PATH}/users`, users)
-app.use(`${BASE_PATH}/dividends`, dividends)
 app.use(`${BASE_PATH}/auth`, auth)
 
 app.use((err, req, res, next) => {
