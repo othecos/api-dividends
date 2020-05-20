@@ -1,25 +1,37 @@
 export class User{
-    constructor(email){
+    constructor(email,name,photoURL,provider){
         this.uid
         this.email = email;
+        this.name = name;
+        this.photoURL = photoURL;
+        this.provider = provider;
     }
     setUid(uid){
         this.uid = uid
     }
     toJSON(){
-        return {
-            email: this.email
-        }
+        let obj = { }
+        if(this.email) obj.email = this.email
+        if(this.name) obj.name = this.name
+        if(this.photoURL) obj.photoURL = this.photoURL
+        if(this.provider) obj.provider = this.provider
+        return obj
     }
     toDatabase(){
         return {
-            email: this.email
+            email: this.email,
+            name: this.name,
+            photoURL: this.photoURL,
+            provider: this.provider,
         }
     }
     setDataFromDB(DBdata){
         if(DBdata){
             if(DBdata.uid) this.uid = DBdata.uid
             if(DBdata.email) this.email = DBdata.email
+            if(DBdata.name) this.name = DBdata.name
+            if(DBdata.photoURL) this.photoURL = DBdata.photoURL
+            if(DBdata.provider) this.provider = DBdata.provider
         }
     }
 }

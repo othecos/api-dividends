@@ -20,7 +20,6 @@ const search = async (req,res) =>{
     } catch (error) {
         res.status(error.code || 500).json({message: error.message || 'Internal server error'})
     }
-   
 }
 const notify = async (req,res)=>{
     try {

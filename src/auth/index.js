@@ -3,7 +3,7 @@ import { SECRET_ID } from '../credentials/firebase'
 const NoneSecureRoutes = ['/swagger']
 export default async (req, res, next) => {
     if (NoneSecureRoutes.some(route => req.path.includes(route))) return next()
-    let token = req.headers['authToken']
+    let token = req.headers['authtoken']
     if (token) {
         try {
             admin.auth().verifyIdToken(token)

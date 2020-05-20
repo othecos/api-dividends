@@ -11,7 +11,8 @@ import * as admin from 'firebase-admin'
 import {
     users,
     dividends,
-    auth
+    auth,
+    stocks
 } from './routers'
 
 
@@ -32,6 +33,7 @@ app.use(morgan(':user-agent :method :url :status :response-time ms'))
 
 const BASE_PATH = '/v1'
 app.use(AuthenticatorMiddleware)
+app.use(`${BASE_PATH}/stocks`, stocks)
 app.use(`${BASE_PATH}/users`, users)
 app.use(`${BASE_PATH}/dividends`, dividends)
 app.use(`${BASE_PATH}/auth`, auth)
