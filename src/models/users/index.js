@@ -1,10 +1,10 @@
 export class User{
-    constructor(email,name,photoURL,provider){
+    constructor(email,displayName,photoURL,providers){
         this.uid
         this.email = email;
-        this.name = name;
+        this.displayName = displayName;
         this.photoURL = photoURL;
-        this.provider = provider;
+        this.providers = providers || [];
     }
     setUid(uid){
         this.uid = uid
@@ -12,26 +12,44 @@ export class User{
     toJSON(){
         let obj = { }
         if(this.email) obj.email = this.email
-        if(this.name) obj.name = this.name
+        if(this.displayName) obj.displayName = this.displayName
         if(this.photoURL) obj.photoURL = this.photoURL
-        if(this.provider) obj.provider = this.provider
+        if(this.providers) obj.providers = this.providers
         return obj
     }
     toDatabase(){
-        return {
-            email: this.email,
-            name: this.name,
-            photoURL: this.photoURL,
-            provider: this.provider,
-        }
+        let obj = { }
+        if(this.email) obj.email = this.email
+        if(this.displayName) obj.displayName = this.displayName
+        if(this.photoURL) obj.photoURL = this.photoURL
+        if(this.providers) obj.providers = this.providers.map((provider)=>{
+            provider = JSON.parse(JSON.stringify(provider))
+            return {
+                ...provider
+            }
+        })
+        return obj
     }
     setDataFromDB(DBdata){
         if(DBdata){
             if(DBdata.uid) this.uid = DBdata.uid
             if(DBdata.email) this.email = DBdata.email
-            if(DBdata.name) this.name = DBdata.name
+            if(DBdata.displayName) this.displayName = DBdata.displayName
             if(DBdata.photoURL) this.photoURL = DBdata.photoURL
-            if(DBdata.provider) this.provider = DBdata.provider
+            if(DBdata.providers) this.providers = DBdata.providers
+        }
+    }
+    setDataFromAuthUser(DBdata){
+        if(DBdata){
+            if(DBdata.uid) this.uid = DBdata.uid
+            if(DBdata.email) this.email = DBdata.email
+            if(DBdata.displayName) this.displayName = DBdata.displayName
+            if(DBdata.photoURL) this.photoURL = DBdata.photoURL
+            if(DBdata.providerData) {
+                DBdata.providerData.forEach((provider)=>{
+                    this.providers.push(provider)
+                })
+            }
         }
     }
 }

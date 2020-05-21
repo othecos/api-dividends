@@ -37,16 +37,14 @@ export default class UsersController {
             throw { code: error.code, message: error.message }
         }
     }
-    async create(email, fields) {
+    async create(email) {
         try {
             let authUser = await this.authController.findAuthUser(email)
             if (authUser) {
-                let user = {
-                    ...fields,
-                    email
-                }
-                await this.usersStorage.create(authUser.uid, user)
-                return authUser;
+                const user = new User()
+                user.setDataFromAuthUser(authUser)
+                await this.usersStorage.create(authUser.uid, user.toDatabase())
+                return user;
             } else {
                 throw { code: 404, message: 'User Auth Not Found' }
             }
