@@ -23,7 +23,6 @@ export class StocksController{
                     timestamp: Date.now(),
                     type: getStockType(stockCode)
                 }
-                console.log(response)
                 return response
             }else{
                 return null
@@ -36,7 +35,6 @@ export class StocksController{
     } 
     async getMultipleStockQuotes(stocksCode){
         try{
-            console.log(stocksCode)
             if(stocksCode && Array.isArray(stocksCode)){
                 let stocks = []
                 for (let index = 0; index < stocksCode.length; index++) {
