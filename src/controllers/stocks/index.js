@@ -1,6 +1,6 @@
 import cheerio from 'cheerio'
 import fetch from 'node-fetch'
-import { STOCK_PRICE_URL } from '../../configs/stocks'
+import { STOCK_PRICE_URL, getStockType } from '../../configs/stocks'
 
 export class StocksController{
     constructor(){
@@ -19,9 +19,11 @@ export class StocksController{
                 let quote = $('[title="Valor atual do ativo"] > .value').text()
                 const response = { 
                     code: stockCode,
-                    price: quote ? quote : 'Not found',
-                    timestamp: Date.now()
+                    price: quote,
+                    timestamp: Date.now(),
+                    type: getStockType(stockCode)
                 }
+                console.log(response)
                 return response
             }else{
                 return null

@@ -4,6 +4,7 @@ import { DIVIDENDS_CALENDAR_URL,DIVIDENDS_DICTIONARY,months} from "../../configs
 import moment from "moment";
 import { getDividendsTemplate } from "../../templates/emails";
 import { EmailController } from "../emails";
+import { getLastWeekDay } from '../../utils/utils';
 moment.locale('pt-br')
 export default class DividendsController {
     constructor() {
@@ -50,7 +51,7 @@ export default class DividendsController {
                                     if(word.key == 'date_ex'){
                                         dividend = {
                                             ...dividend,
-                                            date_com: moment(field[word.key]).subtract(1,'day').toISOString()
+                                            date_com: getLastWeekDay(field[word.key]).toISOString()
                                         }
                                     }
                                 }
