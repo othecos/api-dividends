@@ -5,7 +5,7 @@ export const getCurrentDate = () =>{
 export const getLastWeekDay = (date) =>{
     const mtDate = moment(date)
     let days = 1
-    console.log(mtDate.isoWeekday(),mtDate)
-    if(mtDate.isoWeekday() == 1){  days = 2  }
+    if(mtDate.isoWeekday() == 6){  days = 2  }
+    if(mtDate.isoWeekday() == 1){  days = 3  }
     return mtDate.subtract(days, 'days');
 }
